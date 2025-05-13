@@ -1,5 +1,5 @@
 # Ex.05 Design a Website for Server Side Processing
-## Date:12.5.25
+## Date:
 
 ## AIM:
  To design a website to calculate the power of a lamp filament in an incandescent bulb in the server side. 
@@ -38,8 +38,8 @@ Publish the website in the given URL.
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
 <title>SURFACE AREA OF RIGHT CYLINDER</title>
-<h2 align="center">STEPHEN RAJ Y</h2>
-<h3 align="center">212223230217</h3>
+<h2 align="center">ABISHEK S</h2>
+<h3 align="center">212224240003</h3>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <style type="text/css">
 body {
@@ -97,16 +97,62 @@ h1 {
 </body>
 </html>
 
+views.py
+
+from django.shortcuts import render
+
+def rightcylinder(request):
+    context = {}
+    context['area'] = "0"
+    context['r'] = "0"
+    context['h'] = "0"
+    
+    if request.method == 'POST':
+        print("POST method is used")
+        
+        # Print the entire request.POST object
+        print('request.POST:', request.POST)
+        
+        r = request.POST.get('Radius', '0')  # Corrected key to retrieve radius
+        h = request.POST.get('height', '0')  # Corrected key to retrieve height
+        print('radius =', r)
+        print('height =', h)
+        
+        area = (2 * 3.14 * int(r) * int(h)) + (2 * 3.14 * int(r) * int(r))
+        context['area'] = area
+        context['r'] = r
+        context['h'] = h
+        print('Area =', area)
+    
+    return render(request, 'sapp/frontend.html', context)
+
+# Create your views here.
+
+urls.py
+
+from django.contrib import admin
+from django.urls import path
+from sapp import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('areaofrightcylinder/',views.rightcylinder,name="areaofrightcylinder"),
+    path('',views.rightcylinder,name="areaofrightcylinderroot")
+]
+
 
 
 ```
 
-
 ## SERVER SIDE PROCESSING:
-![alt text](<Screenshot 2025-04-23 111018.png>)
+![image](https://github.com/user-attachments/assets/6df3fc02-0966-4392-b0ae-32d072c6517c)
+
 
 ## HOMEPAGE:
-![alt text](<Screenshot 2025-04-23 110951.png>)
+
+![image](https://github.com/user-attachments/assets/c8489d22-0a7e-4526-95dc-ef5aedcd47b4)
+
+## RESULT:
+The program for performing server side processing is completed successfully
 
 ## RESULT:
 The program for performing server side processing is completed successfully.
